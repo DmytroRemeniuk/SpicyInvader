@@ -9,11 +9,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Threading;
 
 namespace SpicyInvader
 {
     internal class Program
-    {
+    { 
         static void Main(string[] args)
         {
             #region Variables
@@ -35,6 +36,8 @@ namespace SpicyInvader
             //spaceship
             const string SPACESHIP = "«=ˆ=»";
             #endregion
+
+            Blast blast = new Blast(positionX: 0, positionY: 0);
 
             //set the size of the console
             Console.SetWindowSize(WINDOW_WIDTH, WINDOW_HEIGHT);
@@ -100,14 +103,15 @@ namespace SpicyInvader
                 Console.Clear();
                 //display in a specific location
                 Console.SetCursorPosition(START_X, START_Y);
-                x = START_X-1;
-                Console.WriteLine(SPACESHIP);
+                x = START_X;//give the variable a start point
+                Console.WriteLine(SPACESHIP);//display a spaceship
 
                 do
                 {
                     //moving
-                    switch(Console.ReadKey().Key)
+                    switch(Console.ReadKey(true).Key)
                     {
+                        case ConsoleKey.D:
                         case ConsoleKey.RightArrow:
                             if(x < MAX_Y)
                             {
@@ -115,6 +119,7 @@ namespace SpicyInvader
                                 x++;
                             }
                             break;
+                        case ConsoleKey.A:
                         case ConsoleKey.LeftArrow:
                             if(x > MIN_Y)
                             {
@@ -122,13 +127,76 @@ namespace SpicyInvader
                                 x--;
                             }
                             break ;
+                        case ConsoleKey.Spacebar:
+                            blast = new Blast(positionX: x + 2, positionY: START_Y - 1);
+                            break;
                     }
-                    Console.SetCursorPosition(oldX, START_Y);
-                    Console.Write(" ");
-                    Console.SetCursorPosition(oldX + SPACESHIP.Length-1, START_Y);
-                    Console.Write(" ");
-                    Console.SetCursorPosition(x, START_Y);
-                    Console.Write(SPACESHIP);
+                    Move();
+
+                    //shooting
+                    while (blast.PositionY > 0)
+                    {
+                        if(blast.PositionY < START_Y - 1)
+                        {
+                            Console.SetCursorPosition(blast.PositionX, blast.PositionY);
+                            Console.Write(" ");
+                        }
+                        blast.PositionY--;
+                        Console.SetCursorPosition(blast.PositionX, blast.PositionY);
+                        Console.Write(blast.Display);
+                        if(blast.PositionY == 0)
+                        {
+                            Console.SetCursorPosition(blast.PositionX, blast.PositionY);
+                            Console.Write(" ");
+                        }
+                        //to prevent the stop of programm in await of button press
+                        while(Console.KeyAvailable)
+                        {
+                            //to move the spaceship and a missile at the same time
+                            switch (Console.ReadKey(true).Key)
+                            {
+                                case ConsoleKey.D:
+                                case ConsoleKey.RightArrow:
+                                    if (x < MAX_Y)
+                                    {
+                                        oldX = x;
+                                        x++;
+                                    }
+                                    Console.SetCursorPosition(oldX, START_Y);
+                                    Console.Write(" "); ;
+                                    Console.SetCursorPosition(x, START_Y);
+                                    Console.Write(SPACESHIP);
+                                    break;
+                                case ConsoleKey.A:
+                                case ConsoleKey.LeftArrow:
+                                    if (x > MIN_Y)
+                                    {
+                                        oldX = x;
+                                        x--;
+                                    }
+                                    Console.SetCursorPosition(oldX + SPACESHIP.Length - 1, START_Y);
+                                    Console.Write(" ");
+                                    Console.SetCursorPosition(x, START_Y);
+                                    Console.Write(SPACESHIP);
+                                    break;
+                            }
+                        }
+                        //wait for 30 milliseconds/speed
+                        Thread.Sleep(25);
+                    }
+                    
+
+
+                    //method that moves the spaceship
+                    void Move()
+                    {
+                        Console.SetCursorPosition(oldX, START_Y);
+                        Console.Write(" ");
+                        Console.SetCursorPosition(oldX + SPACESHIP.Length - 1, START_Y);
+                        Console.Write(" ");
+                        Console.SetCursorPosition(x, START_Y);
+                        Console.Write(SPACESHIP);
+                    }
                 } while(true);
             }
         }

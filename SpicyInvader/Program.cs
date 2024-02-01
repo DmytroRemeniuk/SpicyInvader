@@ -8,17 +8,20 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 using System.Threading;
+using System.Windows.Input;
 
 namespace SpicyInvader
 {
     internal class Program
-    { 
+    {
+        const int ENEMY_QUANTITY_X = 10;
+        const int ENEMY_QUANTITY_Y = 7;
+        [STAThread]
         static void Main(string[] args)
         {
             #region Variables
-            string menuChoice = "";//to recover the user's input
+            string menuChoice;//to recover the user's input
             int x;//to recover the spaceship's position
             int oldX = 0;//stock of x
             #endregion
@@ -35,9 +38,16 @@ namespace SpicyInvader
             const int MIN_Y = 0;
             //spaceship
             const string SPACESHIP = "«=ˆ=»";
+            //for enemies
+            
+            const int ENEMY_START_X = 35;
+            const int ENEMY_START_Y = 10;
             #endregion
 
-            Blast blast = new Blast(positionX: 0, positionY: 0);
+            Enemy[,] enemyTable = new Enemy[ENEMY_QUANTITY_X, ENEMY_QUANTITY_Y];
+            Enemy enemy = new Enemy(ENEMY_START_X, ENEMY_START_Y);
+            Blast blast = new Blast(0, -1);
+            
 
             //set the size of the console
             Console.SetWindowSize(WINDOW_WIDTH, WINDOW_HEIGHT);
@@ -106,85 +116,56 @@ namespace SpicyInvader
                 x = START_X;//give the variable a start point
                 Console.WriteLine(SPACESHIP);//display a spaceship
 
+                //create the enemies
+                for(int i = 0; i < ENEMY_QUANTITY_X; i++)
+                {
+                    for(int j = 0; j < ENEMY_QUANTITY_Y; j++)
+                    {
+                        enemy = new Enemy(positionX : ENEMY_START_X + i*6, positionY : ENEMY_START_Y + j*2);
+                        Console.SetCursorPosition(enemy.PositionX, enemy.PositionY);
+                        Console.Write(enemy.Display);
+                        enemyTable[i, j] = enemy;
+                    }
+                }
+
                 do
                 {
                     //moving
-                    switch(Console.ReadKey(true).Key)
+                    while (true)
                     {
-                        case ConsoleKey.D:
-                        case ConsoleKey.RightArrow:
-                            if(x < MAX_Y)
-                            {
-                                oldX = x;
-                                x++;
-                            }
-                            break;
-                        case ConsoleKey.A:
-                        case ConsoleKey.LeftArrow:
-                            if(x > MIN_Y)
-                            {
-                                oldX = x;
-                                x--;
-                            }
-                            break ;
-                        case ConsoleKey.Spacebar:
-                            blast = new Blast(positionX: x + 2, positionY: START_Y - 1);
-                            break;
-                    }
-                    Move();
+                        MovementControl();
 
-                    //shooting
-                    while (blast.PositionY > 0)
-                    {
-                        if(blast.PositionY < START_Y - 1)
+                        if (Keyboard.IsKeyDown(Key.Space))
                         {
-                            Console.SetCursorPosition(blast.PositionX, blast.PositionY);
-                            Console.Write(" ");
-                        }
-                        blast.PositionY--;
-                        Console.SetCursorPosition(blast.PositionX, blast.PositionY);
-                        Console.Write(blast.Display);
-                        if(blast.PositionY == 0)
-                        {
-                            Console.SetCursorPosition(blast.PositionX, blast.PositionY);
-                            Console.Write(" ");
-                        }
-                        //to prevent the stop of programm in await of button press
-                        while(Console.KeyAvailable)
-                        {
-                            //to move the spaceship and a missile at the same time
-                            switch (Console.ReadKey(true).Key)
+                            blast = new Blast(positionX: x + 2, positionY: START_Y - 1);
+
+                            //shooting
+                            while (blast.PositionY > 0)
                             {
-                                case ConsoleKey.D:
-                                case ConsoleKey.RightArrow:
-                                    if (x < MAX_Y)
-                                    {
-                                        oldX = x;
-                                        x++;
-                                    }
-                                    Console.SetCursorPosition(oldX, START_Y);
-                                    Console.Write(" "); ;
-                                    Console.SetCursorPosition(x, START_Y);
-                                    Console.Write(SPACESHIP);
-                                    break;
-                                case ConsoleKey.A:
-                                case ConsoleKey.LeftArrow:
-                                    if (x > MIN_Y)
-                                    {
-                                        oldX = x;
-                                        x--;
-                                    }
-                                    Console.SetCursorPosition(oldX + SPACESHIP.Length - 1, START_Y);
+                                if (blast.PositionY < START_Y - 1)
+                                {
+                                    Console.SetCursorPosition(blast.PositionX, blast.PositionY);
                                     Console.Write(" ");
-                                    Console.SetCursorPosition(x, START_Y);
-                                    Console.Write(SPACESHIP);
-                                    break;
+                                }
+                                blast.PositionY--;
+                                Console.SetCursorPosition(blast.PositionX, blast.PositionY);
+                                Console.Write(blast.Display);
+                                if (blast.PositionY == 0)
+                                {
+                                    Console.SetCursorPosition(blast.PositionX, blast.PositionY);
+                                    Console.Write(" ");
+                                }
+                                MovementControl();
+                                Move();
+
+                                //wait for 25 milliseconds between movement/speed
+                                Thread.Sleep(25);
                             }
+                            
                         }
-                        //wait for 30 milliseconds/speed
+                        Move();
                         Thread.Sleep(25);
                     }
-                    
 
 
                     //method that moves the spaceship
@@ -192,13 +173,47 @@ namespace SpicyInvader
                     {
                         Console.SetCursorPosition(oldX, START_Y);
                         Console.Write(" ");
+                        if(oldX > MIN_Y)
+                        {
+                            Console.SetCursorPosition(oldX - 1, START_Y);
+                            Console.Write(" ");
+                        }
                         Console.SetCursorPosition(oldX + SPACESHIP.Length - 1, START_Y);
                         Console.Write(" ");
+                        if (oldX > MIN_Y && oldX < MAX_Y)
+                        {
+                            Console.SetCursorPosition(oldX + SPACESHIP.Length, START_Y);
+                            Console.Write(" ");
+                        }
                         Console.SetCursorPosition(x, START_Y);
-                        Console.Write(SPACESHIP);
+                        Console.Write(SPACESHIP); 
+                    }
+                    //method for recovering of the pressed keys and change the coordinates
+                    void MovementControl()
+                    {
+                        if (Keyboard.IsKeyDown(Key.Left) || Keyboard.IsKeyDown(Key.A))
+                        {
+                            if (x > MIN_Y)
+                            {
+                                oldX = x;
+                                x--;
+                            }
+                        }
+
+                        if (Keyboard.IsKeyDown(Key.Right) || Keyboard.IsKeyDown(Key.D))
+                        {
+                            if (x < MAX_Y)
+                            {
+                                oldX = x;
+                                x++;
+                            }
+                        }
                     }
                 } while(true);
             }
         }
+
+        
     }
 }
+

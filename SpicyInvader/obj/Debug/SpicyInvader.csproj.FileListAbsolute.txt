@@ -6,3 +6,10 @@ D:\Spicy Invader (P_Dev)\SpicyInvader\SpicyInvader\obj\Debug\SpicyInvader.csproj
 D:\Spicy Invader (P_Dev)\SpicyInvader\SpicyInvader\obj\Debug\SpicyInvader.csproj.CoreCompileInputs.cache
 D:\Spicy Invader (P_Dev)\SpicyInvader\SpicyInvader\obj\Debug\SpicyInvader.exe
 D:\Spicy Invader (P_Dev)\SpicyInvader\SpicyInvader\obj\Debug\SpicyInvader.pdb
+F:\Spicy Invader (P_Dev)\SpicyInvader\SpicyInvader\bin\Debug\SpicyInvader.exe.config
+F:\Spicy Invader (P_Dev)\SpicyInvader\SpicyInvader\bin\Debug\SpicyInvader.exe
+F:\Spicy Invader (P_Dev)\SpicyInvader\SpicyInvader\bin\Debug\SpicyInvader.pdb
+F:\Spicy Invader (P_Dev)\SpicyInvader\SpicyInvader\obj\Debug\SpicyInvader.csprojAssemblyReference.cache
+F:\Spicy Invader (P_Dev)\SpicyInvader\SpicyInvader\obj\Debug\SpicyInvader.csproj.CoreCompileInputs.cache
+F:\Spicy Invader (P_Dev)\SpicyInvader\SpicyInvader\obj\Debug\SpicyInvader.exe
+F:\Spicy Invader (P_Dev)\SpicyInvader\SpicyInvader\obj\Debug\SpicyInvader.pdb

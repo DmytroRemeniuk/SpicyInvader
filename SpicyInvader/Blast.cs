@@ -8,20 +8,25 @@ namespace SpicyInvader
 {
     internal class Blast
     {
-        private string _display = "|";
+        private const string DISPLAY = "|";
         private int _positionX = 0;
         private int _positionY = 0;
 
+        /// <summary>
+        /// Main constructor
+        /// </summary>
+        /// <param name="positionX"></param>
+        /// <param name="positionY"></param>
         public Blast(int positionX, int positionY)
         {
             _positionX = positionX;
             _positionY = positionY;
         }
 
+        #region Getters&Setters
         public string Display
         {
-            get { return _display; }
-            set { _display = value; }
+            get { return DISPLAY; }
         }
 
         public int PositionX
@@ -35,5 +40,10 @@ namespace SpicyInvader
             get { return _positionY; }
             set { _positionY = value; }
         }
+        #endregion
+
+        #region Methods
+
+        #endregion
     }
 }

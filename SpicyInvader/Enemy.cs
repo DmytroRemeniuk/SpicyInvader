@@ -12,12 +12,18 @@ namespace SpicyInvader
         private int _positionX = 0;
         private int _positionY = 0;
 
+        /// <summary>
+        /// Main constructor
+        /// </summary>
+        /// <param name="positionX"></param>
+        /// <param name="positionY"></param>
         public Enemy(int positionX, int positionY)
         {
             _positionX = positionX;
             _positionY = positionY;
         }
 
+        #region Getters&Setters
         public string Display
         {
             get { return _display; }
@@ -35,5 +41,22 @@ namespace SpicyInvader
             get { return _positionY; }
             set { _positionY = value; }
         }
+
+        public int MoveX(int x)
+        {
+            x++;
+            return x;
+        }
+
+        public int MoveY(int y)
+        {
+            y++;
+            return y;
+        }
+        #endregion
+
+        #region Methods
+
+        #endregion
     }
 }

@@ -160,7 +160,7 @@ namespace SpicyInvader
                             {
                                 for (int j = 0; j < ENEMY_QUANTITY_Y; j++)
                                 {
-                                    if (enemyTable[i, j].Display != "     " && blast.PositionY == enemyTable[i, j].PositionY && blast.PositionX == enemyTable[i, j].PositionX || enemyTable[i, j].Display != "     " && blast.PositionY == enemyTable[i, j].PositionY && blast.PositionX == enemyTable[i, j].PositionX + 1 || enemyTable[i, j].Display != "     " && blast.PositionY == enemyTable[i, j].PositionY && enemyTable[i, j].Display != "     " && blast.PositionX == enemyTable[i, j].PositionX + 2 || enemyTable[i, j].Display != "     " && blast.PositionY == enemyTable[i, j].PositionY && blast.PositionX == enemyTable[i, j].PositionX + 3 || enemyTable[i, j].Display != "     " && blast.PositionY == enemyTable[i, j].PositionY && blast.PositionX == enemyTable[i, j].PositionX + 4)
+                                    if (enemyTable[i, j].Display != "     " && blast.PositionY == enemyTable[i, j].PositionY && blast.PositionX >= enemyTable[i, j].PositionX && blast.PositionX <= enemyTable[i, j].PositionX + 4)
                                     {
                                         enemyTable[i, j].Display = "     ";
                                         Console.SetCursorPosition(enemyTable[i, j].PositionX, enemyTable[i, j].PositionY);

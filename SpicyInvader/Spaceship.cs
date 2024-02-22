@@ -10,12 +10,14 @@ namespace SpicyInvader
     internal class Spaceship
     {
         //attributes
-        private string _display = "«=ˆ=»";
-        private int _positionX = 20;
+        private const string DISPLAY = "«=ˆ=»";
+        private int _positionX = 100;
         private const int _positionY = 50;
+        private int lives = 3;
         //limitation
         private const int MAX_X = 120;
         private const int MIN_X = 0;
+        
 
         #region Getters&Setters
         public int PositionX
@@ -29,7 +31,12 @@ namespace SpicyInvader
         }
         public string Display
         { 
-            get { return _display; }
+            get { return DISPLAY; }
+        }
+        public int Lives
+        {
+            get { return lives; }
+            set { lives = value; }
         }
         #endregion
 
@@ -61,7 +68,7 @@ namespace SpicyInvader
             return oldX;
         }
         /// <summary>
-        /// Display the spaceship at the coordinates
+        /// Display the spaceship at the new coordinates
         /// </summary>
         /// <param name="oldX"></param>
         public void Move(int oldX)
@@ -82,6 +89,17 @@ namespace SpicyInvader
             }
             Console.SetCursorPosition(this.PositionX, this.PositionY);
             Console.Write(this.Display);
+        }
+        /// <summary>
+        /// Collision between the spaceship and enemy's missile
+        /// </summary>
+        /// <param name="enemyMissile"></param>
+        public void Collision(EnemyMissile enemyMissile)
+        {
+            if (enemyMissile.PositionY == this.PositionY && enemyMissile.PositionX >= this.PositionX && enemyMissile.PositionX <= this.PositionX + 4)
+            {
+                this.Lives--;
+            }
         }
         #endregion
     }

@@ -6,9 +6,10 @@ using System.Threading.Tasks;
 
 namespace SpicyInvader
 {
-    internal class Enemy
+    internal class Missile
     {
-        private string _display = "(\\!/)";
+        //attributes
+        private const string DISPLAY = "|";
         private int _positionX = 0;
         private int _positionY = 0;
 
@@ -17,7 +18,7 @@ namespace SpicyInvader
         /// </summary>
         /// <param name="positionX"></param>
         /// <param name="positionY"></param>
-        public Enemy(int positionX, int positionY)
+        public Missile(int positionX, int positionY)
         {
             _positionX = positionX;
             _positionY = positionY;
@@ -26,13 +27,12 @@ namespace SpicyInvader
         #region Getters&Setters
         public string Display
         {
-            get { return _display; }
-            set { _display = value; }
+            get { return DISPLAY; }
         }
 
         public int PositionX
-        {
-            get { return _positionX; }
+        { 
+            get { return _positionX; } 
             set { _positionX = value; }
         }
 
@@ -41,23 +41,34 @@ namespace SpicyInvader
             get { return _positionY; }
             set { _positionY = value; }
         }
-
-        public int MoveX(int x)
-        {
-            x++;
-            return x;
-        }
-
-        public int MoveY(int y)
-        {
-            y++;
-            return y;
-        }
         #endregion
 
         #region Methods
         /// <summary>
-        /// Write the enemy's display in the right place
+        /// The start of shooting
+        /// </summary>
+        public void Shoot(Spaceship spaceship)
+        {
+            this.PositionX = spaceship.PositionX + 2;
+            this.PositionY = spaceship.PositionY - 1;
+        }
+        /// <summary>
+        /// Change the Y coordinate of the missile
+        /// </summary>
+        public void Move()
+        {
+            this.PositionY--;
+        }
+        /// <summary>
+        /// Erase the missile on the previous position
+        /// </summary>
+        public void Erase()
+        {
+            Console.SetCursorPosition(this.PositionX, this.PositionY);
+            Console.Write(" ");
+        }
+        /// <summary>
+        /// Write/display the missile on the new position
         /// </summary>
         public void Write()
         {

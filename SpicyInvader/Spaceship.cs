@@ -13,7 +13,7 @@ namespace SpicyInvader
         private const string DISPLAY = "«=ˆ=»";
         private int _positionX = 100;
         private const int _positionY = 50;
-        private int lives = 3;
+        private int lives = 300000;
         //limitation
         private const int MAX_X = 120;
         private const int MIN_X = 0;

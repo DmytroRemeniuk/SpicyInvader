@@ -12,8 +12,8 @@ namespace SpicyInvader
         //attributes
         private const string DISPLAY = "«=ˆ=»";
         private int _positionX = 100;
-        private const int _positionY = 50;
-        private int lives = 300000;
+        private const int POSITION_Y = 50;
+        private int lives = 3;
         //limitation
         private const int MAX_X = 120;
         private const int MIN_X = 0;
@@ -27,7 +27,7 @@ namespace SpicyInvader
         }
         public int PositionY
         {
-            get { return _positionY; }
+            get { return POSITION_Y; }
         }
         public string Display
         { 

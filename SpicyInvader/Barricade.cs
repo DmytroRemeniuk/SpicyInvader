@@ -6,18 +6,16 @@ using System.Threading.Tasks;
 
 namespace SpicyInvader
 {
-    internal class Enemy
+    internal class Barricade
     {
-        private string _display = "(\\!/)";
+        //attributes
+        private string _display = "N";
         private int _positionX = 0;
         private int _positionY = 0;
+        private int lives = 2;
 
-        /// <summary>
-        /// Main constructor
-        /// </summary>
-        /// <param name="positionX"></param>
-        /// <param name="positionY"></param>
-        public Enemy(int positionX, int positionY)
+        //constructor
+        public Barricade(int positionX, int positionY)
         {
             _positionX = positionX;
             _positionY = positionY;
@@ -42,30 +40,11 @@ namespace SpicyInvader
             set { _positionY = value; }
         }
 
-        public int MoveX(int x)
+        public int Lives
         {
-            x++;
-            return x;
+            get { return lives; }
+            set { lives = value; }
         }
-
-        public int MoveY(int y)
-        {
-            y++;
-            return y;
-        }
-        #endregion
-
-        #region Methods
-        /// <summary>
-        /// Write the enemy's display in the right place
-        /// </summary>
-        public void Write()
-        {
-            Console.SetCursorPosition(this.PositionX, this.PositionY);
-            Console.Write(this.Display);
-        }
-
-        
         #endregion
     }
 }

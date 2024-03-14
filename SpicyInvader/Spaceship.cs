@@ -17,22 +17,36 @@ namespace SpicyInvader
         //limitation
         private const int MAX_X = 120;
         private const int MIN_X = 0;
-        
 
         #region Getters&Setters
+        /// <summary>
+        /// Get the spaceship's position X
+        /// </summary>
         public int PositionX
         { 
             get { return _positionX; } 
             set { _positionX = value; } 
         }
+
+        /// <summary>
+        /// Get the spaceship's position Y
+        /// </summary>
         public int PositionY
         {
             get { return POSITION_Y; }
         }
+
+        /// <summary>
+        /// Get the spaceship's display
+        /// </summary>
         public string Display
         { 
             get { return DISPLAY; }
         }
+
+        /// <summary>
+        /// Get&Set the spaceship's lives
+        /// </summary>
         public int Lives
         {
             get { return lives; }

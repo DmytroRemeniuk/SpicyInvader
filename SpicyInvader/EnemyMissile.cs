@@ -21,7 +21,11 @@ namespace SpicyInvader
         private const int ENEMY_MISSILE_Y = 51;
         #endregion
 
-        //constructor
+        /// <summary>
+        /// Enemy missile's constructor
+        /// </summary>
+        /// <param name="positionX">Enemy missile's position X</param>
+        /// <param name="positionY">Enemy missile's position X</param>
         public EnemyMissile(int positionX, int positionY)
         {
             _positionX = positionX;
@@ -29,21 +33,35 @@ namespace SpicyInvader
         }
 
         #region Getters&Setters
+        /// <summary>
+        /// 
+        /// </summary>
         public string Display
         {
             get { return DISPLAY; }
         }
+
+        /// <summary>
+        /// 
+        /// </summary>
         public int PositionX
         {
             get { return _positionX; }
             set { _positionX = value; }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
         public int PositionY
         {
             get { return _positionY; }
             set { _positionY = value; }
         }
+
+        /// <summary>
+        /// Get the max position Y
+        /// </summary>
         public int MaxY
         {
             get { return MAX_Y; }

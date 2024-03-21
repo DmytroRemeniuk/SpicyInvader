@@ -49,10 +49,8 @@ namespace SpicyInvader
         private const int MIN_X = 0;
         //barricades
         private const int BARR_QUANTITY_Y = 3;
-        private const int BARR_QUANTITY_X = 6;
-        private const int BARR1_X = 20;
-        private const int BARR2_X = 60;
-        private const int BARR3_X = 100;
+        private const int BARR_QUANTITY_X = 90;
+        private const int BARR_X = 20;
         private const int BARR_Y = 45;
         #endregion
 
@@ -71,7 +69,7 @@ namespace SpicyInvader
             #endregion //source - https://stackoverflow.com/questions/38426338/c-sharp-console-disable-resize
 
             //variables
-            string menuChoice;//to recover the user's input
+            int menuChoice = 1;//to recover the user's input
 
             //set the size of the console
             Console.SetWindowSize(WINDOW_WIDTH, WINDOW_HEIGHT);
@@ -81,55 +79,47 @@ namespace SpicyInvader
             //menu and a loop to continue the game
             do
             {
-                //write the menu's content
-                Console.WriteLine("    Menu\n" +
-                                  "[1] Jouer\n" +
-                                  "[2] Options\n" +
-                                  "[3] Voir le highscore\n" +
-                                  "[4] A propos\n" +
-                                  "[Q] Quitter");
-                menuChoice = Console.ReadLine().ToUpper();//recover the choice 
-                //make sure the answer is appropriate to the menu content
-                while(menuChoice != "1" && menuChoice != "2" && menuChoice != "3" && menuChoice != "4" && menuChoice != "Q")
-                {
-                    Console.WriteLine("Veuillez choisir une des options du menu");
-                    menuChoice = Console.ReadLine().ToUpper();
-                }
+                Console.WriteLine("                       _____       _                      _____                     _            _____\n" +
+                                  "                      / ____|     (_)                    |_   _|                   | |          / ____|\n" +
+                                  "                     | (___  _ __  _  ___ _   _            | |  _ ____   ____ _  __| | ___ _ __| (__\n" +
+                                  "                      \\___ \\| '_ \\| |/ __| | | |           | | | '_ \\ \\ / / _` |/ _` |/ _ \\ '__|\\___ \\\n" +
+                                  "                      ____) | |_) | | (__  |_| |          _| |_| | | \\ V / (_| | (_| |  __/ |  ____)  |\n" +
+                                  "                     |_____/| .__/|_|\\___|\\__, |         |_____|_| |_|\\_/ \\__,_|\\__,_|\\___|_|  |_____/\n" +
+                                  "                            | |            __/ |      \n" +
+                                  "                            |_|           |___/        ");
+                Console.SetCursorPosition(60, 20);
+                Console.WriteLine("Menu");
+                Console.SetCursorPosition(55, 21);
+                Console.WriteLine("Start the game");
+                Console.SetCursorPosition(59, 22);
+                Console.WriteLine("Options");
+                Console.SetCursorPosition(58, 23);
+                Console.WriteLine("Highscore");
+                Console.SetCursorPosition(60, 24);
+                Console.WriteLine("About");
+                Console.SetCursorPosition(60, 25);
+                Console.WriteLine("Quit");
+
+                Console.ReadLine();
+
 
                 //verify the choice and pass to the chosen stage
                 switch(menuChoice)
                 {
-                    case "1":
+                    case 1:
                         Game();
-                        ContinueQuit();
                         break;
-                    case "2":
+                    case 2:
                         Console.WriteLine("Options");
-                        ContinueQuit();
                         break ;
-                    case "3":
+                    case 3:
                         Console.WriteLine("Highscore");
-                        ContinueQuit();
                         break;
-                    case "4":
+                    case 4:
                         Console.WriteLine("A propos");
-                        ContinueQuit();
                         break;
                 }
-            }while (menuChoice != "Q");//quit if "Q"
-
-            //method that asks every time if the user wants to continue or quit
-            void ContinueQuit()
-            {
-                Console.WriteLine("Continuer [C] ou quitter [q]?");
-                menuChoice = Console.ReadLine().ToUpper();
-                //make sure that only "C" or "Q" will be entered
-                while (menuChoice != "C" && menuChoice != "Q")
-                {
-                    Console.WriteLine("Veuillez choisir une des options");
-                    menuChoice = Console.ReadLine().ToUpper();
-                }
-            } 
+            }while (menuChoice != 5);//quit if "Q"
         }
         /// <summary>
         /// Game method
@@ -152,16 +142,14 @@ namespace SpicyInvader
             int yLeft = 0;
             int leftCounter = 0;
             //time of await of movement
-            int sleep = 20;
+            int sleep = 2;
             #endregion
 
             #region Objects
             Enemy[,] enemyTable = new Enemy[ENEMY_QUANTITY_X, ENEMY_QUANTITY_Y];
             Missile missile = new Missile(0, 0);
             EnemyMissile enemyMissile = new EnemyMissile(0, ENEMY_MISSILE_Y);
-            Barricade[,] barricades1 = new Barricade[BARR_QUANTITY_Y, BARR_QUANTITY_X];
-            Barricade[,] barricades2 = new Barricade[BARR_QUANTITY_Y, BARR_QUANTITY_X];
-            Barricade[,] barricades3 = new Barricade[BARR_QUANTITY_Y, BARR_QUANTITY_X];
+            Barricade[,] barricades = new Barricade[BARR_QUANTITY_Y, BARR_QUANTITY_X];
             #endregion
 
             Console.Clear();
@@ -192,27 +180,12 @@ namespace SpicyInvader
             {
                 for(int j = 0; j < BARR_QUANTITY_X; j++)
                 {
-                    barricades1[i, j] = new Barricade(BARR1_X + j, BARR_Y + i);
-                    Console.SetCursorPosition(barricades1[i, j].PositionX, barricades1[i, j].PositionY);
-                    Console.Write(barricades1[i, j].Display);
-                }
-            }
-            for (int i = 0; i < BARR_QUANTITY_Y; i++)
-            {
-                for (int j = 0; j < BARR_QUANTITY_X; j++)
-                {
-                    barricades2[i, j] = new Barricade(BARR2_X + j, BARR_Y + i);
-                    Console.SetCursorPosition(barricades2[i, j].PositionX, barricades2[i, j].PositionY);
-                    Console.Write(barricades2[i, j].Display);
-                }
-            }
-            for (int i = 0; i < BARR_QUANTITY_Y; i++)
-            {
-                for (int j = 0; j < BARR_QUANTITY_X; j++)
-                {
-                    barricades3[i, j] = new Barricade(BARR3_X + j, BARR_Y + i);
-                    Console.SetCursorPosition(barricades3[i, j].PositionX, barricades3[i, j].PositionY);
-                    Console.Write(barricades3[i, j].Display);
+                    if(j < 8 || j > 40 && j < 49 || j > 81)
+                    {
+                        barricades[i, j] = new Barricade(BARR_X + j, BARR_Y + i);
+                        Console.SetCursorPosition(barricades[i, j].PositionX, barricades[i, j].PositionY);
+                        Console.Write(barricades[i, j].Display);
+                    }
                 }
             }
 
@@ -239,11 +212,11 @@ namespace SpicyInvader
                         i = -1;
                     }
                 }
-                if (enemyTable[xDescend, yDescend] != null && enemyTable[xDescend, yDescend].PositionY != spaceship.PositionY)
+                if (enemyTable[xDescend, yDescend].PositionY != BARR_Y)
                 {
                     Moving();
                 }
-                else if (enemyTable[xDescend, yDescend] != null && enemyTable[xDescend, yDescend].PositionY == spaceship.PositionY)
+                else
                 {
                     spaceship.Lives = 0;
                 }
@@ -397,96 +370,66 @@ namespace SpicyInvader
                 {
                     for (int j = 0; j < BARR_QUANTITY_X; j++)
                     {
-                        if (barricades1[i, j] != null && barricades1[i, j].PositionX == enemyMissile.PositionX && barricades1[i, j].PositionY == enemyMissile.PositionY || barricades1[i, j].Lives != 0 && barricades1[i, j].PositionX == missile.PositionX && barricades1[i, j].PositionY == missile.PositionY)
+                        if(barricades[i, j] != null)
                         {
-                            barricades1[i, j].Lives--;
-                            if(barricades1[i, j].Lives == 0)
+                            //enemy's missile
+                            if (barricades[i, j].PositionX == enemyMissile.PositionX && barricades[i, j].PositionY == enemyMissile.PositionY)
                             {
-                                barricades1[i, j] = null;
-                            }
-                            else
-                            {
-                                barricades1[i, j].Display = "n";
-                            }
-
-                            if(barricades1[i, j] != null)
-                            {
-                                for (int k = 0; k < BARR_QUANTITY_Y; k++)
+                                barricades[i, j].Lives--;
+                                if (barricades[i, j].Lives == 0)
                                 {
-                                    for (int l = 0; l < BARR_QUANTITY_X; l++)
+                                    Console.SetCursorPosition(barricades[i, j].PositionX, barricades[i, j].PositionY);
+                                    Console.Write(" ");
+                                    barricades[i, j] = null;
+                                }
+                                else
+                                {
+                                    barricades[i, j].Display = "n";
+                                }
+
+                                if (barricades[i, j] != null)
+                                {
+                                    for (int k = 0; k < BARR_QUANTITY_Y; k++)
                                     {
-                                        Console.SetCursorPosition(barricades1[i, j].PositionX, barricades1[i, j].PositionY);
-                                        Console.Write(barricades1[i, j].Display);
+                                        for (int l = 0; l < BARR_QUANTITY_X; l++)
+                                        {
+                                            Console.SetCursorPosition(barricades[i, j].PositionX, barricades[i, j].PositionY);
+                                            Console.Write(barricades[i, j].Display);
+                                        }
                                     }
                                 }
+                                enemyMissile.PositionY = ENEMY_MISSILE_Y;
                             }
-
-                            missile.PositionY = 0;
-                        }
-                    }
-                }
-                for (int i = 0; i < BARR_QUANTITY_Y; i++)
-                {
-                    for (int j = 0; j < BARR_QUANTITY_X; j++)
-                    {
-                        if (barricades2[i, j] != null && barricades2[i, j].PositionX == enemyMissile.PositionX && barricades2[i, j].PositionY == enemyMissile.PositionY || barricades2[i, j].Lives != 0 && barricades2[i, j].PositionX == missile.PositionX && barricades2[i, j].PositionY == missile.PositionY)
-                        {
-                            barricades2[i, j].Lives--;
-                            if (barricades1[i, j].Lives == 0)
+                            //spaceship's missile
+                            else if(barricades[i, j].PositionX == missile.PositionX && barricades[i, j].PositionY == missile.PositionY)
                             {
-                                barricades2[i, j] = null;
-                            }
-                            else
-                            {
-                                barricades2[i, j].Display = "n";
-                            }
-
-                            if(barricades2[i, j] != null)
-                            {
-                                for (int k = 0; k < BARR_QUANTITY_Y; k++)
+                                barricades[i, j].Lives--;
+                                if (barricades[i, j].Lives == 0)
                                 {
-                                    for (int l = 0; l < BARR_QUANTITY_X; l++)
+                                    Console.SetCursorPosition(barricades[i, j].PositionX, barricades[i, j].PositionY);
+                                    Console.Write(" ");
+                                    barricades[i, j] = null;
+                                }
+                                else
+                                {
+                                    barricades[i, j].Display = "n";
+                                }
+
+                                if (barricades[i, j] != null)
+                                {
+                                    for (int k = 0; k < BARR_QUANTITY_Y; k++)
                                     {
-                                        Console.SetCursorPosition(barricades2[i, j].PositionX, barricades2[i, j].PositionY);
-                                        Console.Write(barricades2[i, j].Display);
+                                        for (int l = 0; l < BARR_QUANTITY_X; l++)
+                                        {
+                                            Console.SetCursorPosition(barricades[i, j].PositionX, barricades[i, j].PositionY);
+                                            Console.Write(barricades[i, j].Display);
+                                        }
                                     }
                                 }
+                                missile.PositionY = 0;
                             }
-                            
-                            missile.PositionY = 0;
                         }
-                    }
-                }
-                for (int i = 0; i < BARR_QUANTITY_Y; i++)
-                {
-                    for (int j = 0; j < BARR_QUANTITY_X; j++)
-                    {
-                        if (barricades3[i, j] != null && barricades3[i, j].PositionX == enemyMissile.PositionX && barricades3[i, j].PositionY == enemyMissile.PositionY || barricades3[i, j].Lives != 0 && barricades3[i, j].PositionX == missile.PositionX && barricades3[i, j].PositionY == missile.PositionY)
-                        {
-                            barricades3[i, j].Lives--;
-                            if (barricades3[i, j].Lives == 0)
-                            {
-                                barricades3[i, j] = null;
-                            }
-                            else
-                            {
-                                barricades3[i, j].Display = "n";
-                            }
-
-                            if (barricades3[i, j] != null)
-                            {
-                                for (int k = 0; k < BARR_QUANTITY_Y; k++)
-                                {
-                                    for (int l = 0; l < BARR_QUANTITY_X; l++)
-                                    {
-                                        Console.SetCursorPosition(barricades3[i, j].PositionX, barricades3[i, j].PositionY);
-                                        Console.Write(barricades3[i, j].Display);
-                                    }
-                                }
-                            }
-
-                            missile.PositionY = 0;
-                        }
+                        
                     }
                 }
 

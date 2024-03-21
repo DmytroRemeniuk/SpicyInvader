@@ -1,4 +1,10 @@
-﻿using System;
+﻿/*
+    ETML
+    Autor         : Dmytro Remeniuk
+    Date          : 18.01.2024
+    Description   : the game Space Invader (Spicy Invader) on the console Windows
+*/
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;

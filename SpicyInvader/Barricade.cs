@@ -7,50 +7,30 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.Remoting.Messaging;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace SpicyInvader
 {
-    internal class Barricade
+    internal class Barricade : GameObject
     {
-        //attributes
-        private string _display = "N";
-        private int _positionX = 0;
-        private int _positionY = 0;
-        private int lives = 2;
-
         //constructor
         public Barricade(int positionX, int positionY)
         {
             _positionX = positionX;
             _positionY = positionY;
+            _display = "N";
+            _lives = 2;
         }
 
         #region Getters&Setters
-        public string Display
-        {
-            get { return _display; }
-            set { _display = value; }
-        }
-
-        public int PositionX
-        {
-            get { return _positionX; }
-            set { _positionX = value; }
-        }
-
-        public int PositionY
-        {
-            get { return _positionY; }
-            set { _positionY = value; }
-        }
-
         public int Lives
         {
-            get { return lives; }
-            set { lives = value; }
+            get { return _lives; }
+            set { _lives = value; }
         }
         #endregion
+
     }
 }

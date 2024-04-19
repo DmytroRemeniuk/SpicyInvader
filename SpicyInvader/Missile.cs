@@ -12,42 +12,19 @@ using System.Threading.Tasks;
 
 namespace SpicyInvader
 {
-    internal class Missile
+    internal class Missile : GameObject
     {
-        //attributes
-        private const string DISPLAY = "|";
-        private int _positionX = 0;
-        private int _positionY = 0;
-
         /// <summary>
         /// Main constructor
         /// </summary>
         /// <param name="positionX"></param>
         /// <param name="positionY"></param>
-        public Missile(int positionX, int positionY)
+        public Missile(int positionX, int positionY, string display)
         {
             _positionX = positionX;
             _positionY = positionY;
+            _display = display;
         }
-
-        #region Getters&Setters
-        public string Display
-        {
-            get { return DISPLAY; }
-        }
-
-        public int PositionX
-        { 
-            get { return _positionX; } 
-            set { _positionX = value; }
-        }
-
-        public int PositionY
-        {
-            get { return _positionY; }
-            set { _positionY = value; }
-        }
-        #endregion
 
         #region Methods
         /// <summary>
@@ -59,27 +36,40 @@ namespace SpicyInvader
             this.PositionY = spaceship.PositionY - 1;
         }
         /// <summary>
-        /// Change the Y coordinate of the missile
+        /// Start of the shooting
         /// </summary>
-        public void Move()
+        /// <param name="i">from for cycle</param>
+        /// <param name="j">from for cycle</param>
+        /// <param name="enemy">enemy from the array</param>
+        public void EnemyShoot(int i, int j, Enemy enemy)
+        {
+            Random random = new Random();
+            int enemyX = random.Next(ENEMY_QUANTITY_X);
+            int enemyY = random.Next(ENEMY_QUANTITY_Y);
+
+            //enemies' shooting
+            if (this.PositionY == ENEMY_MISSILE_Y && enemyX == i && enemyY == j && enemy.Display != "     ")
+            {
+                this.PositionY = enemy.PositionY + 1;
+                this.PositionX = enemy.PositionX + 2;
+            }
+        }
+        /// <summary>
+        /// Change the Y coordinate of the player's missile
+        /// </summary>
+        public void MoveUp()
         {
             this.PositionY--;
         }
         /// <summary>
-        /// Erase the missile on the previous position
+        /// Change the Y coordinate of the enemy's 
         /// </summary>
-        public void Erase()
+        public void MoveDown()
         {
-            Console.SetCursorPosition(this.PositionX, this.PositionY);
-            Console.Write(" ");
-        }
-        /// <summary>
-        /// Write/display the missile on the new position
-        /// </summary>
-        public void Write()
-        {
-            Console.SetCursorPosition(this.PositionX, this.PositionY);
-            Console.Write(this.Display);
+            if (this.PositionY != ENEMY_MISSILE_Y)
+            {
+                this.PositionY++;
+            }
         }
         #endregion
     }

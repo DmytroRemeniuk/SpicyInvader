@@ -13,50 +13,24 @@ using System.Windows.Input;
 
 namespace SpicyInvader
 {
-    internal class Spaceship
+    internal class Spaceship : GameObject
     {
-        //attributes
-        private const string DISPLAY = "«=ˆ=»";
-        private int _positionX = 100;
-        private const int POSITION_Y = 50;
-        private int lives = 3;
-        //limitation
-        private const int MAX_X = 120;
-        private const int MIN_X = 0;
+        public Spaceship()
+        {
+            _positionX = 100;
+            _positionY = 50;
+            _display = "«=ˆ=»";
+            _lives = 3;
+        }
 
         #region Getters&Setters
-        /// <summary>
-        /// Get the spaceship's position X
-        /// </summary>
-        public int PositionX
-        { 
-            get { return _positionX; } 
-            set { _positionX = value; } 
-        }
-
-        /// <summary>
-        /// Get the spaceship's position Y
-        /// </summary>
-        public int PositionY
-        {
-            get { return POSITION_Y; }
-        }
-
-        /// <summary>
-        /// Get the spaceship's display
-        /// </summary>
-        public string Display
-        { 
-            get { return DISPLAY; }
-        }
-
         /// <summary>
         /// Get&Set the spaceship's lives
         /// </summary>
         public int Lives
         {
-            get { return lives; }
-            set { lives = value; }
+            get { return _lives; }
+            set { _lives = value; }
         }
         #endregion
 
@@ -114,11 +88,13 @@ namespace SpicyInvader
         /// Collision between the spaceship and enemy's missile
         /// </summary>
         /// <param name="enemyMissile"></param>
-        public void Collision(EnemyMissile enemyMissile)
+        public void Collision(Missile enemyMissile)
         {
             if (enemyMissile.PositionY == this.PositionY && enemyMissile.PositionX >= this.PositionX && enemyMissile.PositionX <= this.PositionX + 4)
             {
                 this.Lives--;
+                Console.SetCursorPosition(119, 0);
+                Console.Write(this.Lives);
             }
         }
         #endregion

@@ -14,8 +14,10 @@ namespace SpicyInvader
 {
     internal class Missile : GameObject
     {
+        private const int ENEMY_MISSILE_Y = 51;
+
         /// <summary>
-        /// Main constructor
+        /// Missile's constructor
         /// </summary>
         /// <param name="positionX"></param>
         /// <param name="positionY"></param>
@@ -41,11 +43,11 @@ namespace SpicyInvader
         /// <param name="i">from for cycle</param>
         /// <param name="j">from for cycle</param>
         /// <param name="enemy">enemy from the array</param>
-        public void EnemyShoot(int i, int j, Enemy enemy)
+        public void EnemyShoot(int i, int j, Enemy enemy, int xEnemy, int yEnemy)
         {
             Random random = new Random();
-            int enemyX = random.Next(ENEMY_QUANTITY_X);
-            int enemyY = random.Next(ENEMY_QUANTITY_Y);
+            int enemyX = random.Next(xEnemy);
+            int enemyY = random.Next(yEnemy);
 
             //enemies' shooting
             if (this.PositionY == ENEMY_MISSILE_Y && enemyX == i && enemyY == j && enemy.Display != "     ")

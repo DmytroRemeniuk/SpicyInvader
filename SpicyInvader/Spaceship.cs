@@ -15,6 +15,10 @@ namespace SpicyInvader
 {
     internal class Spaceship : GameObject
     {
+        //limitation
+        private const int MAX_X = 120;
+        private const int MIN_X = 0;
+
         public Spaceship()
         {
             _positionX = 100;

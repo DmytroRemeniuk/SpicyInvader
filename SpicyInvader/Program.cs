@@ -5,10 +5,6 @@
     Description   : the game Space Invader (Spicy Invader) on the console Windows
 */
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading;
 using System.Runtime.InteropServices;
 
 namespace SpicyInvader
@@ -17,17 +13,17 @@ namespace SpicyInvader
     {
         #region Block the resizing of console (const, import dll and methods)
         private const int MF_BYCOMMAND = 0x00000000;
-        public const int SC_MAXIMIZE = 0xF030;
-        public const int SC_SIZE = 0xF000;
+        private const int SC_MAXIMIZE = 0xF030;
+        private const int SC_SIZE = 0xF000;
         private const int WINDOW_WIDTH = 125;
         private const int WINDOW_HEIGHT = 55;
 
         [DllImport("user32.dll")]
         public static extern int DeleteMenu(IntPtr hMenu, int nPosition, int wFlags);
-                                                                                      
+
         [DllImport("user32.dll")]
         private static extern IntPtr GetSystemMenu(IntPtr hWnd, bool bRevert);
-                                                                                      
+
         [DllImport("kernel32.dll", ExactSpelling = true)]
         private static extern IntPtr GetConsoleWindow();
         #endregion //source - https://stackoverflow.com/questions/38426338/c-sharp-console-disable-resize

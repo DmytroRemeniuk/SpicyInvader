@@ -7,32 +7,36 @@
       "RelativeMoniker": "D:0:0:{18350B1D-43B7-4B81-8CC9-9119DA4D20FC}|SpicyInvader\\SpicyInvader.csproj|solutionrelative:spicyinvader\\game.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{18350B1D-43B7-4B81-8CC9-9119DA4D20FC}|SpicyInvader\\SpicyInvader.csproj|d:\\spicy invader (p_dev)\\spicyinvader\\spicyinvader\\menu.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{18350B1D-43B7-4B81-8CC9-9119DA4D20FC}|SpicyInvader\\SpicyInvader.csproj|D:\\Spicy Invader (P_Dev)\\SpicyInvader\\spicyinvader\\menu.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{18350B1D-43B7-4B81-8CC9-9119DA4D20FC}|SpicyInvader\\SpicyInvader.csproj|solutionrelative:spicyinvader\\menu.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{18350B1D-43B7-4B81-8CC9-9119DA4D20FC}|SpicyInvader\\SpicyInvader.csproj|d:\\spicy invader (p_dev)\\spicyinvader\\spicyinvader\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{18350B1D-43B7-4B81-8CC9-9119DA4D20FC}|SpicyInvader\\SpicyInvader.csproj|solutionrelative:spicyinvader\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{18350B1D-43B7-4B81-8CC9-9119DA4D20FC}|SpicyInvader\\SpicyInvader.csproj|D:\\Spicy Invader (P_Dev)\\SpicyInvader\\spicyinvader\\gameobject.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{18350B1D-43B7-4B81-8CC9-9119DA4D20FC}|SpicyInvader\\SpicyInvader.csproj|solutionrelative:spicyinvader\\gameobject.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{18350B1D-43B7-4B81-8CC9-9119DA4D20FC}|SpicyInvader\\SpicyInvader.csproj|D:\\Spicy Invader (P_Dev)\\SpicyInvader\\spicyinvader\\missile.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{18350B1D-43B7-4B81-8CC9-9119DA4D20FC}|SpicyInvader\\SpicyInvader.csproj|solutionrelative:spicyinvader\\missile.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{18350B1D-43B7-4B81-8CC9-9119DA4D20FC}|SpicyInvader\\SpicyInvader.csproj|D:\\Spicy Invader (P_Dev)\\SpicyInvader\\spicyinvader\\enemy.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{18350B1D-43B7-4B81-8CC9-9119DA4D20FC}|SpicyInvader\\SpicyInvader.csproj|solutionrelative:spicyinvader\\enemy.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{18350B1D-43B7-4B81-8CC9-9119DA4D20FC}|SpicyInvader\\SpicyInvader.csproj|d:\\spicy invader (p_dev)\\spicyinvader\\spicyinvader\\constants.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{18350B1D-43B7-4B81-8CC9-9119DA4D20FC}|SpicyInvader\\SpicyInvader.csproj|solutionrelative:spicyinvader\\constants.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{18350B1D-43B7-4B81-8CC9-9119DA4D20FC}|SpicyInvader\\SpicyInvader.csproj|D:\\Spicy Invader (P_Dev)\\SpicyInvader\\spicyinvader\\spaceship.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{18350B1D-43B7-4B81-8CC9-9119DA4D20FC}|SpicyInvader\\SpicyInvader.csproj|solutionrelative:spicyinvader\\spaceship.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
+      "AbsoluteMoniker": "D:0:0:{18350B1D-43B7-4B81-8CC9-9119DA4D20FC}|SpicyInvader\\SpicyInvader.csproj|D:\\Spicy Invader (P_Dev)\\SpicyInvader\\spicyinvader\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{18350B1D-43B7-4B81-8CC9-9119DA4D20FC}|SpicyInvader\\SpicyInvader.csproj|solutionrelative:spicyinvader\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{18350B1D-43B7-4B81-8CC9-9119DA4D20FC}|SpicyInvader\\SpicyInvader.csproj|D:\\Spicy Invader (P_Dev)\\SpicyInvader\\spicyinvader\\barricade.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{18350B1D-43B7-4B81-8CC9-9119DA4D20FC}|SpicyInvader\\SpicyInvader.csproj|solutionrelative:spicyinvader\\barricade.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{18350B1D-43B7-4B81-8CC9-9119DA4D20FC}|SpicyInvader\\SpicyInvader.csproj|D:\\Spicy Invader (P_Dev)\\SpicyInvader\\spicyinvader\\enemy.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{18350B1D-43B7-4B81-8CC9-9119DA4D20FC}|SpicyInvader\\SpicyInvader.csproj|solutionrelative:spicyinvader\\enemy.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{18350B1D-43B7-4B81-8CC9-9119DA4D20FC}|SpicyInvader\\SpicyInvader.csproj|D:\\Spicy Invader (P_Dev)\\SpicyInvader\\spicyinvader\\missile.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{18350B1D-43B7-4B81-8CC9-9119DA4D20FC}|SpicyInvader\\SpicyInvader.csproj|solutionrelative:spicyinvader\\missile.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{18350B1D-43B7-4B81-8CC9-9119DA4D20FC}|SpicyInvader\\SpicyInvader.csproj|D:\\Spicy Invader (P_Dev)\\SpicyInvader\\spicyinvader\\gameobject.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{18350B1D-43B7-4B81-8CC9-9119DA4D20FC}|SpicyInvader\\SpicyInvader.csproj|solutionrelative:spicyinvader\\gameobject.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -42,8 +46,21 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 1,
+          "SelectedChildIndex": 2,
           "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "Constants.cs",
+              "DocumentMoniker": "D:\\Spicy Invader (P_Dev)\\SpicyInvader\\SpicyInvader\\Constants.cs",
+              "RelativeDocumentMoniker": "SpicyInvader\\Constants.cs",
+              "ToolTip": "D:\\Spicy Invader (P_Dev)\\SpicyInvader\\SpicyInvader\\Constants.cs",
+              "RelativeToolTip": "SpicyInvader\\Constants.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAABcAAAA8AAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-05-03T12:19:05.26Z",
+              "EditorCaption": ""
+            },
             {
               "$type": "Document",
               "DocumentIndex": 1,
@@ -52,7 +69,7 @@
               "RelativeDocumentMoniker": "SpicyInvader\\Menu.cs",
               "ToolTip": "D:\\Spicy Invader (P_Dev)\\SpicyInvader\\SpicyInvader\\Menu.cs",
               "RelativeToolTip": "SpicyInvader\\Menu.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAABwAAAAzAAAA",
+              "ViewState": "AQIAABsAAAAAAAAAAAAAADEAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-04-26T11:23:25.957Z",
               "EditorCaption": ""
@@ -65,85 +82,85 @@
               "RelativeDocumentMoniker": "SpicyInvader\\Game.cs",
               "ToolTip": "D:\\Spicy Invader (P_Dev)\\SpicyInvader\\SpicyInvader\\Game.cs",
               "RelativeToolTip": "SpicyInvader\\Game.cs",
-              "ViewState": "AQIAAEEAAAAAAAAAAADgv04AAAAnAAAA",
+              "ViewState": "AQIAABUBAAAAAAAAAAAAACUBAACiAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-04-26T11:23:23.943Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 7,
+              "DocumentIndex": 5,
               "Title": "Barricade.cs",
               "DocumentMoniker": "D:\\Spicy Invader (P_Dev)\\SpicyInvader\\SpicyInvader\\Barricade.cs",
               "RelativeDocumentMoniker": "SpicyInvader\\Barricade.cs",
               "ToolTip": "D:\\Spicy Invader (P_Dev)\\SpicyInvader\\SpicyInvader\\Barricade.cs",
               "RelativeToolTip": "SpicyInvader\\Barricade.cs",
-              "ViewState": "AQIAABUAAAAAAAAAAAAowBQAAAAmAAAA",
+              "ViewState": "AQIAAAkAAAAAAAAAAAAAAA8AAAAZAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-03-21T09:18:55.431Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 6,
+              "DocumentIndex": 3,
               "Title": "Spaceship.cs",
               "DocumentMoniker": "D:\\Spicy Invader (P_Dev)\\SpicyInvader\\SpicyInvader\\Spaceship.cs",
               "RelativeDocumentMoniker": "SpicyInvader\\Spaceship.cs",
               "ToolTip": "D:\\Spicy Invader (P_Dev)\\SpicyInvader\\SpicyInvader\\Spaceship.cs",
               "RelativeToolTip": "SpicyInvader\\Spaceship.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAABMAAAAkAAAA",
+              "ViewState": "AQIAABgAAAAAAAAAAAAAACMAAAAIAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-03-21T09:18:55.463Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 6,
               "Title": "Enemy.cs",
               "DocumentMoniker": "D:\\Spicy Invader (P_Dev)\\SpicyInvader\\SpicyInvader\\Enemy.cs",
               "RelativeDocumentMoniker": "SpicyInvader\\Enemy.cs",
               "ToolTip": "D:\\Spicy Invader (P_Dev)\\SpicyInvader\\SpicyInvader\\Enemy.cs",
               "RelativeToolTip": "SpicyInvader\\Enemy.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAoAAAAdAAAA",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAYAAAANAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-03-21T09:18:55.463Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 7,
               "Title": "Missile.cs",
               "DocumentMoniker": "D:\\Spicy Invader (P_Dev)\\SpicyInvader\\SpicyInvader\\Missile.cs",
               "RelativeDocumentMoniker": "SpicyInvader\\Missile.cs",
               "ToolTip": "D:\\Spicy Invader (P_Dev)\\SpicyInvader\\SpicyInvader\\Missile.cs",
               "RelativeToolTip": "SpicyInvader\\Missile.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAABEAAAAAAAAA",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAA4AAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-03-21T09:18:55.463Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 8,
               "Title": "GameObject.cs",
               "DocumentMoniker": "D:\\Spicy Invader (P_Dev)\\SpicyInvader\\SpicyInvader\\GameObject.cs",
               "RelativeDocumentMoniker": "SpicyInvader\\GameObject.cs",
               "ToolTip": "D:\\Spicy Invader (P_Dev)\\SpicyInvader\\SpicyInvader\\GameObject.cs",
               "RelativeToolTip": "SpicyInvader\\GameObject.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAACUAAAAJAAAA",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAADUAAAAZAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-03-21T09:23:05.419Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 4,
               "Title": "Program.cs",
               "DocumentMoniker": "D:\\Spicy Invader (P_Dev)\\SpicyInvader\\SpicyInvader\\Program.cs",
               "RelativeDocumentMoniker": "SpicyInvader\\Program.cs",
               "ToolTip": "D:\\Spicy Invader (P_Dev)\\SpicyInvader\\SpicyInvader\\Program.cs",
               "RelativeToolTip": "SpicyInvader\\Program.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAABgAAAAhAAAA",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAABAAAAArAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-03-21T09:18:55.556Z",
               "EditorCaption": ""

@@ -1,9 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Media;
-using System.Text;
-using System.Threading.Tasks;
+using System.IO;
+using System.Linq;
+using System.Windows.Input;
 
 namespace SpicyInvader
 {
@@ -25,8 +24,8 @@ namespace SpicyInvader
         int _menuChoice;//to recover the user's input
         bool _goon = false;
         Game _spicy;
-        SoundPlayer switchMenu = new SoundPlayer();
-        SoundPlayer selectMenu = new SoundPlayer();
+        SoundPlayer switchMenu = new SoundPlayer("..\\..\\Sounds\\switchMenu.wav");
+        SoundPlayer selectMenu = new SoundPlayer("..\\..\\Sounds\\selectMenu.wav");
 
         string[] menuTable = new string[] { "",
                                                 "Start the game",
@@ -47,42 +46,45 @@ namespace SpicyInvader
             //menu and a loop to continue the game
             do
             {
-                DisplayMenu();
+                Console.Clear();
 
                 _menuChoice = 1;
+
+                DisplayMenu();
 
                 do
                 {
                     switch (Console.ReadKey().Key)
                     {
                         case ConsoleKey.UpArrow:
+                            switchMenu.Play();
                             if (_menuChoice > 1)
                             {
                                 _menuChoice--;
                             }
+                            else
+                            {
+                                _menuChoice = 5;
+                            }
                             break;
                         case ConsoleKey.DownArrow:
+                            switchMenu.Play();
                             if (_menuChoice < 5)
                             {
                                 _menuChoice++;
                             }
+                            else
+                            {
+                                _menuChoice = 1;
+                            }
                             break;
                         case ConsoleKey.Enter:
+                            selectMenu.Play();
                             _goon = true;
                             break;
                     }
                     Console.Clear();
-                    Console.WriteLine(TITLE);
-                    for (int i = 1; i < menuTable.Length; i++)
-                    {
-                        if (_menuChoice == i)
-                        {
-                            Activate();
-                        }
-                        Console.SetCursorPosition(55, 20 + i);
-                        Console.WriteLine(menuTable[i]);
-                        Desactivate();
-                    }
+                    DisplayMenu();
                 } while (!_goon);//quit the loop after pressing "Enter"
 
                 _goon = false;
@@ -135,8 +137,29 @@ namespace SpicyInvader
         /// </summary>
         private void Highscore()
         {
+            string[] allText;
+            int cursorY = Constants.MAX_Y / 2 - 10;
+            const int CURSOR_X = Constants.MAX_X / 2;
+
+
             Console.Clear();
-            Console.WriteLine("Highscore");
+
+            Console.SetCursorPosition(CURSOR_X - 2, cursorY);
+            Console.WriteLine("Highscores:");
+            cursorY += 2;
+
+            foreach (string file in Directory.GetFiles(Constants.HIGHSCORE))
+            {
+                allText = File.ReadAllLines(file).ToArray();
+                Console.SetCursorPosition(CURSOR_X, cursorY);
+                Console.Write(allText[0] + ": " + allText[1]);
+                cursorY++;
+            }
+            Activate();
+            cursorY += 10;
+            Console.SetCursorPosition(CURSOR_X - 1, cursorY);
+            Console.WriteLine("Continuer");
+            Desactivate();
             Console.ReadLine();
         }
         /// <summary>
@@ -145,7 +168,10 @@ namespace SpicyInvader
         private void About()
         {
             Console.Clear();
-            Console.WriteLine("About");
+            Console.WriteLine("The goal is to kill the most enemies possible. You can change the mode between simple and difficult in the options.\n" +
+                              "<- -> or [A] [D] to move\n" +
+                              "[SPACE] to shoot\n" +
+                              "[ESC] to finish the game");
             Console.ReadLine();
         }
         /// <summary>
@@ -153,20 +179,17 @@ namespace SpicyInvader
         /// </summary>
         private void DisplayMenu()
         {
-            Console.Clear();
             Console.WriteLine(TITLE);
-            Console.SetCursorPosition(55, 21);
-            Activate();
-            Console.WriteLine(menuTable[1]);
-            Desactivate();
-            Console.SetCursorPosition(55, 22);
-            Console.WriteLine(menuTable[2]);
-            Console.SetCursorPosition(55, 23);
-            Console.WriteLine(menuTable[3]);
-            Console.SetCursorPosition(55, 24);
-            Console.WriteLine(menuTable[4]);
-            Console.SetCursorPosition(55, 25);
-            Console.WriteLine(menuTable[5]);
+            for (int i = 1; i < menuTable.Length; i++)
+            {
+                if (_menuChoice == i)
+                {
+                    Activate();
+                }
+                Console.SetCursorPosition(55, 20 + i);
+                Console.WriteLine(menuTable[i]);
+                Desactivate();
+            }
         }
     }
 }

@@ -5,24 +5,11 @@
     Description   : the game Space Invader (Spicy Invader) on the console Windows
 */
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Media.Media3D;
 
 namespace SpicyInvader
 {
     internal class Enemy : GameObject
     {
-        
-        private const int ENEMY_QUANTITY_X = 8;
-        private const int ENEMY_QUANTITY_Y = 2;
-        private const int ENEMY_START_X = 35;
-        private const int ENEMY_START_Y = 10;
-        private const int ENEMY_POS_MULTIPLIER_X = 8;
-        private const int ENEMY_POS_MULTIPLIER_Y = 3;
-
         /// <summary>
         /// Main enemy's constructor
         /// </summary>
@@ -49,11 +36,11 @@ namespace SpicyInvader
         /// <returns>Array of enemies</returns>
         public static Enemy[,] CreateEnemies(Enemy[,] enemies)
         {
-            for (int i = 0; i < ENEMY_QUANTITY_X; i++)
+            for (int i = 0; i < Constants.ENEMY_QUANTITY_X; i++)
             {
-                for (int j = 0; j < ENEMY_QUANTITY_Y; j++)
+                for (int j = 0; j < Constants.ENEMY_QUANTITY_Y; j++)
                 {
-                    enemies[i, j] = new Enemy(positionX: ENEMY_START_X + i * ENEMY_POS_MULTIPLIER_X, positionY: ENEMY_START_Y + j * ENEMY_POS_MULTIPLIER_Y);
+                    enemies[i, j] = new Enemy(positionX: Constants.ENEMY_START_X + i * Constants.ENEMY_POS_MULTIPLIER_X, positionY: Constants.ENEMY_START_Y + j * Constants.ENEMY_POS_MULTIPLIER_Y);
                     enemies[i, j].Write();
                 }
             }
@@ -71,19 +58,19 @@ namespace SpicyInvader
             int descendCounter = 0;
             int[] indexes = new int[2];
 
-            for (int i = 0; i < ENEMY_QUANTITY_X; i++)
+            for (int i = 0; i < Constants.ENEMY_QUANTITY_X; i++)
             {
                 if (enemies[i, y] != null)
                 {
                     x = i;
-                    i = ENEMY_QUANTITY_X;
+                    i = Constants.ENEMY_QUANTITY_X;
                 }
                 else
                 {
                     descendCounter++;
                 }
 
-                if (y != 0 && descendCounter == ENEMY_QUANTITY_X)
+                if (y != 0 && descendCounter == Constants.ENEMY_QUANTITY_X)
                 {
                     y--;
                     descendCounter = 0;
@@ -106,7 +93,7 @@ namespace SpicyInvader
             int[] indexes = new int[2];
             int rightCounter = 0;
 
-            for (int i = ENEMY_QUANTITY_Y - 1; i >= 0; i--)
+            for (int i = Constants.ENEMY_QUANTITY_Y - 1; i >= 0; i--)
             {
                 if (enemies[x, i] != null)
                 {
@@ -118,11 +105,11 @@ namespace SpicyInvader
                     rightCounter++;
                 }
 
-                if (x != 0 && rightCounter == ENEMY_QUANTITY_Y)
+                if (x != 0 && rightCounter == Constants.ENEMY_QUANTITY_Y)
                 {
                     x--;
                     rightCounter = 0;
-                    i = ENEMY_QUANTITY_Y;
+                    i = Constants.ENEMY_QUANTITY_Y;
                 }
             }
 
@@ -142,19 +129,19 @@ namespace SpicyInvader
             int leftCounter = 0;
             int[] indexes = new int[2];
 
-            for (int i = 0; i < ENEMY_QUANTITY_Y; i++)
+            for (int i = 0; i < Constants.ENEMY_QUANTITY_Y; i++)
             {
                 if (enemies[x, i] != null)
                 {
                     y = i;
-                    i = ENEMY_QUANTITY_Y;
+                    i = Constants.ENEMY_QUANTITY_Y;
                 }
                 else
                 {
                     leftCounter++;
                 }
 
-                if (x != ENEMY_QUANTITY_X - 1 && leftCounter == ENEMY_QUANTITY_Y)
+                if (x != Constants.ENEMY_QUANTITY_X - 1 && leftCounter == Constants.ENEMY_QUANTITY_Y)
                 {
                     x++;
                     leftCounter = 0;

@@ -5,19 +5,14 @@
     Description   : the game Space Invader (Spicy Invader) on the console Windows
 */
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Media;
 using System.Windows.Input;
 
 namespace SpicyInvader
 {
     internal class Spaceship : GameObject
     {
-        //limitation
-        private const int MAX_X = 120;
-        private const int MIN_X = 0;
+        SoundPlayer playerHit = new SoundPlayer("..\\..\\Sounds\\playerHit.wav");
 
         public Spaceship()
         {
@@ -48,7 +43,7 @@ namespace SpicyInvader
         {
             if (Keyboard.IsKeyDown(Key.Left) || Keyboard.IsKeyDown(Key.A))
             {
-                if (this.PositionX > MIN_X)
+                if (this.PositionX > Constants.MIN_X)
                 {
                     oldX = this.PositionX;
                     this.PositionX--;
@@ -57,7 +52,7 @@ namespace SpicyInvader
 
             if (Keyboard.IsKeyDown(Key.Right) || Keyboard.IsKeyDown(Key.D))
             {
-                if (this.PositionX < MAX_X)
+                if (this.PositionX < Constants.MAX_X)
                 {
                     oldX = this.PositionX;
                     this.PositionX++;
@@ -73,14 +68,14 @@ namespace SpicyInvader
         {
             Console.SetCursorPosition(oldX, this.PositionY);
             Console.Write(" ");
-            if (oldX > MIN_X)
+            if (oldX > Constants.MIN_X)
             {
                 Console.SetCursorPosition(oldX - 1, this.PositionY);
                 Console.Write(" ");
             }
             Console.SetCursorPosition(oldX + this.Display.Length - 1, this.PositionY);
             Console.Write(" ");
-            if (oldX > MIN_X && oldX < MAX_X)
+            if (oldX > Constants.MIN_X && oldX < Constants.MAX_X)
             {
                 Console.SetCursorPosition(oldX + this.Display.Length, this.PositionY);
                 Console.Write(" ");
@@ -91,11 +86,12 @@ namespace SpicyInvader
         /// <summary>
         /// Collision between the spaceship and enemy's missile
         /// </summary>
-        /// <param name="enemyMissile"></param>
+        /// <param name="enemyMissile">Enemy's missile</param>
         public void Collision(Missile enemyMissile)
         {
             if (enemyMissile.PositionY == this.PositionY && enemyMissile.PositionX >= this.PositionX && enemyMissile.PositionX <= this.PositionX + 4)
             {
+                playerHit.Play();
                 this.Lives--;
                 Console.SetCursorPosition(119, 0);
                 Console.Write(this.Lives);

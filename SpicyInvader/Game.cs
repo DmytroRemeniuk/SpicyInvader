@@ -1,30 +1,14 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading;
 using System.Windows.Input;
-using System.Diagnostics;
 using System.Media;
+using System.IO;
+using System.Linq;
 
 namespace SpicyInvader
 {
     class Game
     {
-        #region Constants
-        //barricades
-        private const int BARR_QUANTITY_Y = 3;
-        private const int BARR_QUANTITY_X = 90;
-        private const int BARR_Y = 45;
-        //enemies
-        private const int ENEMY_MISSILE_Y = 51;
-        private const int ENEMY_QUANTITY_X = 8;
-        private const int ENEMY_QUANTITY_Y = 2;
-        //limitation
-        private const int MAX_X = 120;
-        private const int MIN_X = 0;
-        #endregion
-
         /// <summary>
         /// Game method
         /// </summary>
@@ -32,17 +16,14 @@ namespace SpicyInvader
         {
             #region Objects
             //GameObject helper = new GameObject();
-            Enemy[,] enemyTable = new Enemy[ENEMY_QUANTITY_X, ENEMY_QUANTITY_Y];
+            Enemy[,] enemyTable = new Enemy[Constants.ENEMY_QUANTITY_X, Constants.ENEMY_QUANTITY_Y];
             Missile playerMissile = new Missile(positionX: 0, positionY: 1, display: "|");
-            Missile enemyMissile = new Missile(positionX: 0, positionY: ENEMY_MISSILE_Y, display: "\"");
+            Missile enemyMissile = new Missile(positionX: 0, positionY: Constants.ENEMY_MISSILE_Y, display: "\"");
             Barricade[,] barricades;
             //sounds
-            SoundPlayer enemyShoot = new SoundPlayer();
-            SoundPlayer enemyDead = new SoundPlayer();
-            SoundPlayer playerShoot = new SoundPlayer("..\\..\\Sounds\\playerShoot.wav");
-            SoundPlayer playerHit = new SoundPlayer();
-            SoundPlayer playerDead = new SoundPlayer();
-            SoundPlayer barricadeExplosion = new SoundPlayer();
+            
+            SoundPlayer enemyDead = new SoundPlayer("..\\..\\Sounds\\enemyDead.wav");
+            SoundPlayer barricadeExplosion = new SoundPlayer("..\\..\\Sounds\\barricadeExplosion.wav");
             #endregion
 
             #region Variables
@@ -51,11 +32,11 @@ namespace SpicyInvader
             int oldX;//stock of x
             int cntrKill = 0;
             int score = 0;
-            int[] xyDescend = new int[] { 0, ENEMY_QUANTITY_Y - 1 };//
-            int[] xyRight = new int[] { ENEMY_QUANTITY_X - 1, 0 }; // Arrays to stock the enemies' indexes at the right, left and bottom edges
-            int[] xyLeft = new int[] { 0, 0 };                       //
+            int[] xyDescend = new int[] { 0, Constants.ENEMY_QUANTITY_Y - 1 };//
+            int[] xyRight = new int[] { Constants.ENEMY_QUANTITY_X - 1, 0 }; // Arrays to stock the enemies' indexes at the right, left and bottom edges
+            int[] xyLeft = new int[] { 0, 0 };                              //
             //time of await of movement
-            int sleep = 3;
+            int sleep = 20;
             #endregion
 
             Console.Clear();
@@ -79,8 +60,14 @@ namespace SpicyInvader
             while (spaceship.Lives > 0)
             {
                 xyDescend = Enemy.LowerEnemy(enemies: enemyTable, x: xyDescend[0], y: xyDescend[1]);
-                if (enemyTable[xyDescend[0], xyDescend[1]].PositionY != BARR_Y)
+                if (enemyTable[xyDescend[0], xyDescend[1]].PositionY != Constants.BARR_Y)
                 {
+                    //finish the game
+                    if(Keyboard.IsKeyDown(Key.Escape))
+                    {
+                        spaceship.Lives = 0;
+                    }
+
                     //spaceship's movement
                     oldX = spaceship.MovementControl(0);
                     spaceship.Move(oldX: oldX);
@@ -88,7 +75,6 @@ namespace SpicyInvader
                     //shooting
                     if (Keyboard.IsKeyDown(Key.Space) && playerMissile.PositionY == 1)
                     {
-                        playerShoot.Play();
                         playerMissile.Shoot(spaceship: spaceship);
                     }
 
@@ -112,22 +98,22 @@ namespace SpicyInvader
                     {
                         xyRight = Enemy.RightEnemy(enemyTable, x: xyRight[0], y: xyRight[1]);
 
-                        for (int i = ENEMY_QUANTITY_X - 1; i >= 0; i--)
+                        for (int i = Constants.ENEMY_QUANTITY_X - 1; i >= 0; i--)
                         {
-                            for (int j = ENEMY_QUANTITY_Y - 1; j >= 0; j--)
+                            for (int j = Constants.ENEMY_QUANTITY_Y - 1; j >= 0; j--)
                             {
                                 if (enemyTable[i, j] != null)
                                 {
                                     enemyTable[i, j].Erase();
                                     enemyTable[i, j].PositionX++;
                                     //descend on the edge
-                                    if (enemyTable[xyRight[0], xyRight[1]].PositionX == MAX_X)
+                                    if (enemyTable[xyRight[0], xyRight[1]].PositionX == Constants.MAX_X)
                                     {
                                         enemyTable[i, j].PositionY++;
                                         isRight = false;
                                     }
                                     enemyTable[i, j].Write();
-                                    enemyMissile.EnemyShoot(i: i, j: j, enemy: enemyTable[i, j], xEnemy: ENEMY_QUANTITY_X, yEnemy: ENEMY_QUANTITY_Y);
+                                    enemyMissile.EnemyShoot(i: i, j: j, enemy: enemyTable[i, j], xEnemy: Constants.ENEMY_QUANTITY_X, yEnemy: Constants.ENEMY_QUANTITY_Y);
                                 }
                             }
                         }
@@ -138,22 +124,22 @@ namespace SpicyInvader
                     {
                         xyLeft = Enemy.LeftEnemy(enemies: enemyTable, x: xyLeft[0], y: xyLeft[1]);
 
-                        for (int i = 0; i < ENEMY_QUANTITY_X; i++)
+                        for (int i = 0; i < Constants.ENEMY_QUANTITY_X; i++)
                         {
-                            for (int j = 0; j < ENEMY_QUANTITY_Y; j++)
+                            for (int j = 0; j < Constants.ENEMY_QUANTITY_Y; j++)
                             {
                                 if (enemyTable[i, j] != null)
                                 {
                                     enemyTable[i, j].Erase();
                                     enemyTable[i, j].PositionX--;
                                     //descend on the edge
-                                    if (enemyTable[xyLeft[0], xyLeft[1]].PositionX == MIN_X)
+                                    if (enemyTable[xyLeft[0], xyLeft[1]].PositionX == Constants.MIN_X)
                                     {
                                         enemyTable[i, j].PositionY++;
                                         isRight = true;
                                     }
                                     enemyTable[i, j].Write();
-                                    enemyMissile.EnemyShoot(i: i, j: j, enemy: enemyTable[i, j], xEnemy: ENEMY_QUANTITY_X, yEnemy: ENEMY_QUANTITY_Y);
+                                    enemyMissile.EnemyShoot(i: i, j: j, enemy: enemyTable[i, j], xEnemy: Constants.ENEMY_QUANTITY_X, yEnemy: Constants.ENEMY_QUANTITY_Y);
                                 }
                             }
                         }
@@ -169,15 +155,24 @@ namespace SpicyInvader
                     enemyMissile.Erase();
                     enemyMissile.MoveDown();
                     enemyMissile.Write();
-                    if (enemyMissile.PositionY == ENEMY_MISSILE_Y)
+                    if (enemyMissile.PositionY == Constants.ENEMY_MISSILE_Y)
                     {
                         enemyMissile.Erase();
                     }
 
-                    //bunker's collision
-                    for (int i = 0; i < BARR_QUANTITY_Y; i++)
+                    //two missiles' collision
+                    if (playerMissile.TwoMissilesCollision(enemyMissile: enemyMissile))
                     {
-                        for (int j = 0; j < BARR_QUANTITY_X; j++)
+                        playerMissile.Erase();
+                        enemyMissile.Erase();
+                        playerMissile.PositionY = 1;
+                        enemyMissile.PositionY = Constants.ENEMY_MISSILE_Y;
+                    }
+
+                    //bunker's collision
+                    for (int i = 0; i < Constants.BARR_QUANTITY_Y; i++)
+                    {
+                        for (int j = 0; j < Constants.BARR_QUANTITY_X; j++)
                         {
                             if (barricades[i, j] != null)
                             {
@@ -186,7 +181,7 @@ namespace SpicyInvader
                                 {
                                     if (barricades[i, j].PositionX == enemyMissile.PositionX)
                                     {
-                                        enemyMissile.PositionY = ENEMY_MISSILE_Y;
+                                        enemyMissile.PositionY = Constants.ENEMY_MISSILE_Y;
                                     }
                                     if (barricades[i, j].PositionX == playerMissile.PositionX)
                                     {
@@ -196,12 +191,13 @@ namespace SpicyInvader
                                     barricades[i, j].Lives--;
                                     if (barricades[i, j].Lives == 0)
                                     {
+                                        barricadeExplosion.Play();
                                         barricades[i, j].Erase();
                                         barricades[i, j] = null;
                                     }
                                     else
                                     {
-                                        barricades[i, j].Display = "n";
+                                        barricades[i, j].Display = "░";
                                         barricades[i, j].Write();
                                     }
                                 }
@@ -213,12 +209,13 @@ namespace SpicyInvader
                     spaceship.Collision(enemyMissile);
 
                     //enemies and missile's collision
-                    for (int i = 0; i < ENEMY_QUANTITY_X; i++)
+                    for (int i = 0; i < Constants.ENEMY_QUANTITY_X; i++)
                     {
-                        for (int j = 0; j < ENEMY_QUANTITY_Y; j++)
+                        for (int j = 0; j < Constants.ENEMY_QUANTITY_Y; j++)
                         {
                             if (enemyTable[i, j] != null && playerMissile.PositionY == enemyTable[i, j].PositionY && playerMissile.PositionX >= enemyTable[i, j].PositionX && playerMissile.PositionX <= enemyTable[i, j].PositionX + 4)
                             {
+                                enemyDead.Play();
                                 enemyTable[i, j].Erase();
                                 enemyTable[i, j] = null;
                                 playerMissile.PositionY = 1;
@@ -231,7 +228,7 @@ namespace SpicyInvader
                     }
 
                     //reset the enemies
-                    if (cntrKill == ENEMY_QUANTITY_X * ENEMY_QUANTITY_Y)
+                    if (cntrKill == Constants.ENEMY_QUANTITY_X * Constants.ENEMY_QUANTITY_Y)
                     {
                         enemyTable = Enemy.CreateEnemies(enemies: enemyTable);
                         cntrKill = 0;
@@ -240,9 +237,9 @@ namespace SpicyInvader
                         {
                             sleep -= 2;
                         }
-                        xyRight[0] = ENEMY_QUANTITY_X - 1;
+                        xyRight[0] = Constants.ENEMY_QUANTITY_X - 1;
                         xyLeft[0] = 0;
-                        xyDescend[1] = ENEMY_QUANTITY_Y - 1;
+                        xyDescend[1] = Constants.ENEMY_QUANTITY_Y - 1;
                     }
 
                     //wait for *sleep* milliseconds to continue the cycle
@@ -262,14 +259,44 @@ namespace SpicyInvader
         /// <param name="score">Player's score</param>
         private static void GameOver(int score)
         {
+            SoundPlayer playerDead = new SoundPlayer("..\\..\\Sounds\\playerDead.wav");
+            playerDead.Play();
+
             Console.Clear();
+            //block entering of the text while playing
+            while (Console.KeyAvailable)
+            {
+                Console.ReadKey(true);
+            }
+
             Console.SetCursorPosition(55, 20);
             Console.WriteLine("YOUR SCORE: " + score);
             Console.SetCursorPosition(53, 21);
             Console.WriteLine("ENTER YOUR NAME:");
             Console.SetCursorPosition(55, 22);
-            Console.ReadLine();
+
+            RegisterHighscore(currentScore: score);
+
             Console.Clear();
+        }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="currentScore"></param>
+        private static void RegisterHighscore(int currentScore)
+        {
+            for (int i = 1; i <= Directory.GetFiles(Constants.HIGHSCORE).Length; i++)
+            {
+                if (currentScore > Convert.ToInt32(File.ReadAllLines(Constants.HIGHSCORE + i + ".txt").ToArray()[1]))
+                {
+                    if (i < Directory.GetFiles(Constants.HIGHSCORE).Length)
+                    {
+                        File.WriteAllText(Constants.HIGHSCORE + (i + 1) + ".txt", File.ReadAllText(Constants.HIGHSCORE + i + ".txt"));//TODO change all the scores
+                    }
+                    File.WriteAllText(Constants.HIGHSCORE + i + ".txt", Console.ReadLine() + "\n" + currentScore);
+                    i = Directory.GetFiles(Constants.HIGHSCORE).Length;
+                }
+            }
         }
     }
 }

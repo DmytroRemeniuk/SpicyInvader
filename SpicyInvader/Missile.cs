@@ -5,16 +5,13 @@
     Description   : the game Space Invader (Spicy Invader) on the console Windows
 */
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Media;
 
 namespace SpicyInvader
 {
     internal class Missile : GameObject
     {
-        private const int ENEMY_MISSILE_Y = 51;
+        SoundPlayer playerShoot = new SoundPlayer("..\\..\\Sounds\\playerShoot.wav");
 
         /// <summary>
         /// Missile's constructor
@@ -34,14 +31,17 @@ namespace SpicyInvader
         /// </summary>
         public void Shoot(Spaceship spaceship)
         {
+            playerShoot.Play();
             this.PositionX = spaceship.PositionX + 2;
             this.PositionY = spaceship.PositionY - 1;
         }
         /// <summary>
         /// Start of the shooting
         /// </summary>
-        /// <param name="i">from for cycle</param>
-        /// <param name="j">from for cycle</param>
+        /// <param name="i">from "for" cycle</param>
+        /// <param name="j">from "for" cycle</param>
+        /// <param name="xEnemy">Enemies' quantity X</param>
+        /// <param name="yEnemy">Enemies' quantity Y</param>
         /// <param name="enemy">enemy from the array</param>
         public void EnemyShoot(int i, int j, Enemy enemy, int xEnemy, int yEnemy)
         {
@@ -50,7 +50,7 @@ namespace SpicyInvader
             int enemyY = random.Next(yEnemy);
 
             //enemies' shooting
-            if (this.PositionY == ENEMY_MISSILE_Y && enemyX == i && enemyY == j && enemy.Display != "     ")
+            if (this.PositionY == Constants.ENEMY_MISSILE_Y && enemyX == i && enemyY == j)
             {
                 this.PositionY = enemy.PositionY + 1;
                 this.PositionX = enemy.PositionX + 2;
@@ -68,10 +68,19 @@ namespace SpicyInvader
         /// </summary>
         public void MoveDown()
         {
-            if (this.PositionY != ENEMY_MISSILE_Y)
+            if (this.PositionY != Constants.ENEMY_MISSILE_Y)
             {
                 this.PositionY++;
             }
+        }
+        /// <summary>
+        /// Verify the collision between two missiles
+        /// </summary>
+        /// <param name="enemyMissile">Enemy's missile</param>
+        /// <returns>True or false</returns>
+        public bool TwoMissilesCollision(Missile enemyMissile)
+        {
+            return (this.PositionX == enemyMissile.PositionX) && (this.PositionY >= enemyMissile.PositionY && this.PositionY <= enemyMissile.PositionY + 1);
         }
         #endregion
     }

@@ -4,6 +4,7 @@ using System.Windows.Input;
 using System.Media;
 using System.IO;
 using System.Linq;
+using System.Runtime.CompilerServices;
 
 namespace SpicyInvader
 {
@@ -259,6 +260,8 @@ namespace SpicyInvader
         /// <param name="score">Player's score</param>
         private static void GameOver(int score)
         {
+            string name = "";
+
             SoundPlayer playerDead = new SoundPlayer("..\\..\\Sounds\\playerDead.wav");
             playerDead.Play();
 
@@ -274,8 +277,9 @@ namespace SpicyInvader
             Console.SetCursorPosition(53, 21);
             Console.WriteLine("ENTER YOUR NAME:");
             Console.SetCursorPosition(55, 22);
+            name = Console.ReadLine();
 
-            RegisterHighscore(currentScore: score);
+            RegisterHighscore(currentScore: score, nickname: name);
 
             Console.Clear();
         }
@@ -283,17 +287,31 @@ namespace SpicyInvader
         /// 
         /// </summary>
         /// <param name="currentScore"></param>
-        private static void RegisterHighscore(int currentScore)
+        private static void RegisterHighscore(int currentScore, string nickname)
         {
+            string firstScore = "";
+            string stockScore = "";
+
             for (int i = 1; i <= Directory.GetFiles(Constants.HIGHSCORE).Length; i++)
             {
                 if (currentScore > Convert.ToInt32(File.ReadAllLines(Constants.HIGHSCORE + i + ".txt").ToArray()[1]))
                 {
-                    if (i < Directory.GetFiles(Constants.HIGHSCORE).Length)
+                    firstScore = File.ReadAllText(Constants.HIGHSCORE + i + ".txt");
+                    File.WriteAllText(Constants.HIGHSCORE + i + ".txt", nickname + "\n" + currentScore);
+                    for (int j = i; j < Directory.GetFiles(Constants.HIGHSCORE).Length; j++)
                     {
-                        File.WriteAllText(Constants.HIGHSCORE + (i + 1) + ".txt", File.ReadAllText(Constants.HIGHSCORE + i + ".txt"));//TODO change all the scores
+                        if(j == i)
+                        {
+                            stockScore = File.ReadAllText(Constants.HIGHSCORE + (j + 1) + ".txt");
+                            File.WriteAllText(Constants.HIGHSCORE + (j + 1) + ".txt", firstScore);
+                        }
+                        else
+                        {
+                            firstScore = File.ReadAllText(Constants.HIGHSCORE + (j + 1) + ".txt");
+                            File.WriteAllText(Constants.HIGHSCORE + (j + 1) + ".txt", stockScore);
+                            stockScore = firstScore;
+                        }
                     }
-                    File.WriteAllText(Constants.HIGHSCORE + i + ".txt", Console.ReadLine() + "\n" + currentScore);
                     i = Directory.GetFiles(Constants.HIGHSCORE).Length;
                 }
             }
